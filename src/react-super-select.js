@@ -163,7 +163,10 @@ var ReactSuperSelect = React.createClass({
     searchPlaceholder: React.PropTypes.string,
 
     // **tagRemoveLabelString** (String) *optional* - (Used in conjunction with the **tags** option) This string will be used as an aria-label for the remove-tag button on each tag (for accesibility).
-    tagRemoveLabelString: React.PropTypes.string
+    tagRemoveLabelString: React.PropTypes.string,
+
+    lang: React.PropTypes.string
+
   },
 
   // CONSTANTS
@@ -177,14 +180,26 @@ var ReactSuperSelect = React.createClass({
 
   // Default string values for localization options
   DEFAULT_LOCALIZATIONS: {
-    ajaxErrorString: 'An Error occured while fetching options',
-    clearSelectionLabelString: 'Clear Selection',
-    clearSearchLabelString: 'Clear Search Field',
-    noResultsString: 'No Results Available',
-    placeholder: 'Select an Option',
-    searchPlaceholder: 'Search',
-    tagRemoveLabelString: 'Remove Tag',
-	multiResultsLabel: 'Selected @COUNT@ items'
+    'en': {
+      ajaxErrorString: 'An Error occured while fetching options',
+      clearSelectionLabelString: 'Clear Selection',
+      clearSearchLabelString: 'Clear Search Field',
+      noResultsString: 'No Results Available',
+      placeholder: 'Select an Option',
+      searchPlaceholder: 'Search',
+      tagRemoveLabelString: 'Remove Tag',
+      multiResultsLabel: 'Selected @COUNT@ items'
+    },
+    'cs': {
+      ajaxErrorString: 'Nastala chyba při načítání dat',
+      clearSelectionLabelString: 'Vymazat',
+      clearSearchLabelString: 'Vymazat',
+      noResultsString: 'Žádné výsledky',
+      placeholder: 'Vyberte...',
+      searchPlaceholder: 'Vyhledat',
+      tagRemoveLabelString: 'Odstranit štítek',
+      multiResultsLabel: 'Vybráno @COUNT@ kategorií'
+    }
   },
 
   // STATE VARIABLES
@@ -222,7 +237,9 @@ var ReactSuperSelect = React.createClass({
       value: this._buildInitialValue(),
 
       // **valueKey** (String) - The option object key that will be used to identify the value used as an option's value property (values must be unique across data source)
-      valueKey: this.props.optionValueKey || 'id'
+      valueKey: this.props.optionValueKey || 'id',
+
+      lang: this.props.lang || 'en'
     };
   },
 
@@ -300,7 +317,7 @@ var ReactSuperSelect = React.createClass({
   // main render method
   render: function() {
     var clearSelectionButton = null,
-        clearSelectionLabelString = this.props.clearSelectionLabelString ? this.props.clearSelectionLabelString : this.DEFAULT_LOCALIZATIONS.clearSelectionLabelString,
+        clearSelectionLabelString = this.props.clearSelectionLabelString ? this.props.clearSelectionLabelString : this.DEFAULT_LOCALIZATIONS[this.state.lang].clearSelectionLabelString,
         dropdownContent = this._getDropdownContent(),
         placeholderString,
 		multiResultsLabelString,
@@ -322,8 +339,8 @@ var ReactSuperSelect = React.createClass({
       'r-ss-placeholder': this.state.value.length < 1
     });
 
-    placeholderString = this.props.placeholder ? this.props.placeholder : this.DEFAULT_LOCALIZATIONS.placeholder;
-	multiResultsLabelString = this.props.multiResultsLabel ? this.props.multiResultsLabel : this.DEFAULT_LOCALIZATIONS.multiResultsLabel;
+    placeholderString = this.props.placeholder ? this.props.placeholder : this.DEFAULT_LOCALIZATIONS[this.state.lang].placeholder;
+	multiResultsLabelString = this.props.multiResultsLabel ? this.props.multiResultsLabel : this.DEFAULT_LOCALIZATIONS[this.state.lang].multiResultsLabel;
     multiResultsLabelString = multiResultsLabelString.replace("@COUNT@", this.state.value.length);
 	contentToDisplay = this._isMultiSelect() ? multiResultsLabelString : this._generateValueDisplay();
     triggerDisplayContent = this.state.value.length ? contentToDisplay : placeholderString;
@@ -611,7 +628,7 @@ var ReactSuperSelect = React.createClass({
 
   // render the content shown if an ajax error occurs
   _getAjaxErrorMarkup: function() {
-    var errorString = this.props.ajaxErrorString ? this.props.ajaxErrorString : this.DEFAULT_LOCALIZATIONS.ajaxErrorString;
+    var errorString = this.props.ajaxErrorString ? this.props.ajaxErrorString : this.DEFAULT_LOCALIZATIONS[this.state.lang].ajaxErrorString;
     return (<li className="r-ss-dropdown-option error"><i ref="errorDisplay">{errorString}</i></li>);
   },
 
@@ -691,7 +708,7 @@ var ReactSuperSelect = React.createClass({
 
   // render the content shown when no options are available
   _getNoResultsMarkup: function() {
-    var noResultsString = this.props.noResultsString ? this.props.noResultsString : this.DEFAULT_LOCALIZATIONS.noResultsString;
+    var noResultsString = this.props.noResultsString ? this.props.noResultsString : this.DEFAULT_LOCALIZATIONS[this.state.lang].noResultsString;
     return (<li className="r-ss-dropdown-option" tabIndex="-1"><i ref="noResults">{noResultsString}</i></li>);
   },
 
@@ -779,9 +796,9 @@ var ReactSuperSelect = React.createClass({
     }
 
     var clearSearch = null,
-        clearSearchLabelString = this.props.clearSearchLabelString ? this.props.clearSearchLabelString : this.DEFAULT_LOCALIZATIONS.clearSearchLabelString,
+        clearSearchLabelString = this.props.clearSearchLabelString ? this.props.clearSearchLabelString : this.DEFAULT_LOCALIZATIONS[this.state.lang].clearSearchLabelString,
         magnifierClass = this.props.customSearchIconClass ? this.props.customSearchIconClass : "r-ss-magnifier",
-        searchPlaceholderString = this.props.searchPlaceholder ? this.props.searchPlaceholder : this.DEFAULT_LOCALIZATIONS.searchPlaceholder,
+        searchPlaceholderString = this.props.searchPlaceholder ? this.props.searchPlaceholder : this.DEFAULT_LOCALIZATIONS[this.state.lang][this.state.lang].searchPlaceholder,
         searchAriaId = this.state.controlId + '_search',
         searchAriaIdLabel = searchAriaId + '_label';
 
@@ -843,7 +860,7 @@ var ReactSuperSelect = React.createClass({
         tagKey = 'tag_' + displayValue,
         buttonName = "RemoveTag_" + displayValue,
         tagRemoveIndex = this._getTagRemoveIndex(displayValue),
-        tagRemoveButtonLabelString = this.props.tagRemoveLabelString ? this.props.tagRemoveLabelString : this.DEFAULT_LOCALIZATIONS.tagRemoveLabelString,
+        tagRemoveButtonLabelString = this.props.tagRemoveLabelString ? this.props.tagRemoveLabelString : this.DEFAULT_LOCALIZATIONS[this.state.lang].tagRemoveLabelString,
         tagWrapClass = this.props.customTagClass ? "r-ss-tag " + this.props.customTagClass : "r-ss-tag";
 
     tagRemoveButtonLabelString = tagRemoveButtonLabelString + " " + label;
