@@ -798,7 +798,7 @@ var ReactSuperSelect = React.createClass({
     var clearSearch = null,
         clearSearchLabelString = this.props.clearSearchLabelString ? this.props.clearSearchLabelString : this.DEFAULT_LOCALIZATIONS[this.state.lang].clearSearchLabelString,
         magnifierClass = this.props.customSearchIconClass ? this.props.customSearchIconClass : "r-ss-magnifier",
-        searchPlaceholderString = this.props.searchPlaceholder ? this.props.searchPlaceholder : this.DEFAULT_LOCALIZATIONS[this.state.lang][this.state.lang].searchPlaceholder,
+        searchPlaceholderString = this.props.searchPlaceholder ? this.props.searchPlaceholder : this.DEFAULT_LOCALIZATIONS[this.state.lang].searchPlaceholder,
         searchAriaId = this.state.controlId + '_search',
         searchAriaIdLabel = searchAriaId + '_label';
 
