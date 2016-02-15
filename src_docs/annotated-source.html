@@ -782,7 +782,10 @@ and will be called as the predicate function of <a href="https://lodash.com/docs
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    tagRemoveLabelString: React.PropTypes.string
+            <div class="content"><div class='highlight'><pre>    tagRemoveLabelString: React.PropTypes.string,
+
+    lang: React.PropTypes.string
+
   },</pre></div></div>
             
         </li>
@@ -854,14 +857,26 @@ and will be called as the predicate function of <a href="https://lodash.com/docs
             </div>
             
             <div class="content"><div class='highlight'><pre>  DEFAULT_LOCALIZATIONS: {
-    ajaxErrorString: <span class="hljs-string">'An Error occured while fetching options'</span>,
-    clearSelectionLabelString: <span class="hljs-string">'Clear Selection'</span>,
-    clearSearchLabelString: <span class="hljs-string">'Clear Search Field'</span>,
-    noResultsString: <span class="hljs-string">'No Results Available'</span>,
-    placeholder: <span class="hljs-string">'Select an Option'</span>,
-    searchPlaceholder: <span class="hljs-string">'Search'</span>,
-    tagRemoveLabelString: <span class="hljs-string">'Remove Tag'</span>,
-	multiResultsLabel: <span class="hljs-string">'Selected @COUNT@ items'</span>
+    <span class="hljs-string">'en'</span>: {
+      ajaxErrorString: <span class="hljs-string">'An Error occured while fetching options'</span>,
+      clearSelectionLabelString: <span class="hljs-string">'Clear Selection'</span>,
+      clearSearchLabelString: <span class="hljs-string">'Clear Search Field'</span>,
+      noResultsString: <span class="hljs-string">'No Results Available'</span>,
+      placeholder: <span class="hljs-string">'Select an Option'</span>,
+      searchPlaceholder: <span class="hljs-string">'Search'</span>,
+      tagRemoveLabelString: <span class="hljs-string">'Remove Tag'</span>,
+      multiResultsLabel: <span class="hljs-string">'Selected @COUNT@ items'</span>
+    },
+    <span class="hljs-string">'cs'</span>: {
+      ajaxErrorString: <span class="hljs-string">'Nastala chyba při načítání dat'</span>,
+      clearSelectionLabelString: <span class="hljs-string">'Vymazat'</span>,
+      clearSearchLabelString: <span class="hljs-string">'Vymazat'</span>,
+      noResultsString: <span class="hljs-string">'Žádné výsledky'</span>,
+      placeholder: <span class="hljs-string">'Vyberte...'</span>,
+      searchPlaceholder: <span class="hljs-string">'Vyhledat'</span>,
+      tagRemoveLabelString: <span class="hljs-string">'Odstranit štítek'</span>,
+      multiResultsLabel: <span class="hljs-string">'Vybráno @COUNT@ kategorií'</span>
+    }
   },</pre></div></div>
             
         </li>
@@ -1055,7 +1070,9 @@ and will be called as the predicate function of <a href="https://lodash.com/docs
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      valueKey: <span class="hljs-keyword">this</span>.props.optionValueKey || <span class="hljs-string">'id'</span>
+            <div class="content"><div class='highlight'><pre>      valueKey: <span class="hljs-keyword">this</span>.props.optionValueKey || <span class="hljs-string">'id'</span>,
+
+      lang: <span class="hljs-keyword">this</span>.props.lang || <span class="hljs-string">'en'</span>
     };
   },</pre></div></div>
             
@@ -1239,7 +1256,7 @@ Reset some state defaults and dataSource related fields if dataSource changed.</
             
             <div class="content"><div class='highlight'><pre>  render: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">var</span> clearSelectionButton = <span class="hljs-literal">null</span>,
-        clearSelectionLabelString = <span class="hljs-keyword">this</span>.props.clearSelectionLabelString ? <span class="hljs-keyword">this</span>.props.clearSelectionLabelString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.clearSelectionLabelString,
+        clearSelectionLabelString = <span class="hljs-keyword">this</span>.props.clearSelectionLabelString ? <span class="hljs-keyword">this</span>.props.clearSelectionLabelString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].clearSelectionLabelString,
         dropdownContent = <span class="hljs-keyword">this</span>._getDropdownContent(),
         placeholderString,
 		multiResultsLabelString,
@@ -1261,8 +1278,8 @@ Reset some state defaults and dataSource related fields if dataSource changed.</
       <span class="hljs-string">'r-ss-placeholder'</span>: <span class="hljs-keyword">this</span>.state.value.length &lt; <span class="hljs-number">1</span>
     });
 
-    placeholderString = <span class="hljs-keyword">this</span>.props.placeholder ? <span class="hljs-keyword">this</span>.props.placeholder : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.placeholder;
-	multiResultsLabelString = <span class="hljs-keyword">this</span>.props.multiResultsLabel ? <span class="hljs-keyword">this</span>.props.multiResultsLabel : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.multiResultsLabel;
+    placeholderString = <span class="hljs-keyword">this</span>.props.placeholder ? <span class="hljs-keyword">this</span>.props.placeholder : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].placeholder;
+	multiResultsLabelString = <span class="hljs-keyword">this</span>.props.multiResultsLabel ? <span class="hljs-keyword">this</span>.props.multiResultsLabel : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].multiResultsLabel;
     multiResultsLabelString = multiResultsLabelString.replace(<span class="hljs-string">"@COUNT@"</span>, <span class="hljs-keyword">this</span>.state.value.length);
 	contentToDisplay = <span class="hljs-keyword">this</span>._isMultiSelect() ? multiResultsLabelString : <span class="hljs-keyword">this</span>._generateValueDisplay();
     triggerDisplayContent = <span class="hljs-keyword">this</span>.state.value.length ? contentToDisplay : placeholderString;
@@ -1815,7 +1832,7 @@ for keyboard navigation and accessibility</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  _getAjaxErrorMarkup: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">var</span> errorString = <span class="hljs-keyword">this</span>.props.ajaxErrorString ? <span class="hljs-keyword">this</span>.props.ajaxErrorString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.ajaxErrorString;
+    <span class="hljs-keyword">var</span> errorString = <span class="hljs-keyword">this</span>.props.ajaxErrorString ? <span class="hljs-keyword">this</span>.props.ajaxErrorString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].ajaxErrorString;
     <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-dropdown-option error"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"errorDisplay"</span>&gt;</span>{errorString}<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>)</span>;
   },</pre></div></div>
             
@@ -1967,7 +1984,7 @@ in search of a better solution for announcing/navigating grouped listbox items a
             </div>
             
             <div class="content"><div class='highlight'><pre>  _getNoResultsMarkup: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">var</span> noResultsString = <span class="hljs-keyword">this</span>.props.noResultsString ? <span class="hljs-keyword">this</span>.props.noResultsString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.noResultsString;
+    <span class="hljs-keyword">var</span> noResultsString = <span class="hljs-keyword">this</span>.props.noResultsString ? <span class="hljs-keyword">this</span>.props.noResultsString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].noResultsString;
     <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-dropdown-option"</span> <span class="hljs-attr">tabIndex</span>=<span class="hljs-string">"-1"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"noResults"</span>&gt;</span>{noResultsString}<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>)</span>;
   },</pre></div></div>
             
@@ -2143,9 +2160,9 @@ the conversion does not alter the string representation’s value</p>
     }
 
     <span class="hljs-keyword">var</span> clearSearch = <span class="hljs-literal">null</span>,
-        clearSearchLabelString = <span class="hljs-keyword">this</span>.props.clearSearchLabelString ? <span class="hljs-keyword">this</span>.props.clearSearchLabelString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.clearSearchLabelString,
+        clearSearchLabelString = <span class="hljs-keyword">this</span>.props.clearSearchLabelString ? <span class="hljs-keyword">this</span>.props.clearSearchLabelString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].clearSearchLabelString,
         magnifierClass = <span class="hljs-keyword">this</span>.props.customSearchIconClass ? <span class="hljs-keyword">this</span>.props.customSearchIconClass : <span class="hljs-string">"r-ss-magnifier"</span>,
-        searchPlaceholderString = <span class="hljs-keyword">this</span>.props.searchPlaceholder ? <span class="hljs-keyword">this</span>.props.searchPlaceholder : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.searchPlaceholder,
+        searchPlaceholderString = <span class="hljs-keyword">this</span>.props.searchPlaceholder ? <span class="hljs-keyword">this</span>.props.searchPlaceholder : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang][<span class="hljs-keyword">this</span>.state.lang].searchPlaceholder,
         searchAriaId = <span class="hljs-keyword">this</span>.state.controlId + <span class="hljs-string">'_search'</span>,
         searchAriaIdLabel = searchAriaId + <span class="hljs-string">'_label'</span>;
 
@@ -2233,7 +2250,7 @@ the conversion does not alter the string representation’s value</p>
         tagKey = <span class="hljs-string">'tag_'</span> + displayValue,
         buttonName = <span class="hljs-string">"RemoveTag_"</span> + displayValue,
         tagRemoveIndex = <span class="hljs-keyword">this</span>._getTagRemoveIndex(displayValue),
-        tagRemoveButtonLabelString = <span class="hljs-keyword">this</span>.props.tagRemoveLabelString ? <span class="hljs-keyword">this</span>.props.tagRemoveLabelString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS.tagRemoveLabelString,
+        tagRemoveButtonLabelString = <span class="hljs-keyword">this</span>.props.tagRemoveLabelString ? <span class="hljs-keyword">this</span>.props.tagRemoveLabelString : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].tagRemoveLabelString,
         tagWrapClass = <span class="hljs-keyword">this</span>.props.customTagClass ? <span class="hljs-string">"r-ss-tag "</span> + <span class="hljs-keyword">this</span>.props.customTagClass : <span class="hljs-string">"r-ss-tag"</span>;
 
     tagRemoveButtonLabelString = tagRemoveButtonLabelString + <span class="hljs-string">" "</span> + label;
