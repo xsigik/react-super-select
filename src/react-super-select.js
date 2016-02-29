@@ -655,7 +655,7 @@ var ReactSuperSelect = React.createClass({
 
     var searchContent = this._getSearchContent(),
         selectionButtons = this._getSelectionButtons(),
-        controlButtons = this._getControlButtons(),
+        controlButtons = this.props.multiple ? this._getControlButtons() : null,
         mouseMoveHandler,
         pagingLi;
 
