@@ -1882,7 +1882,7 @@ will trigger the <strong>ajaxDataFetch</strong> fetch (and show loader) if neede
     }
 
     <span class="hljs-keyword">var</span> searchContent = <span class="hljs-keyword">this</span>._getSearchContent(),
-        selectionButtons = <span class="hljs-keyword">this</span>._getSelectionButtons(),
+        selectionButtons = <span class="hljs-keyword">this</span>.props.multiple ? <span class="hljs-keyword">this</span>._getSelectionButtons() : <span class="hljs-literal">null</span>,
         controlButtons = <span class="hljs-keyword">this</span>.props.multiple ? <span class="hljs-keyword">this</span>._getControlButtons() : <span class="hljs-literal">null</span>,
         mouseMoveHandler,
         pagingLi;
@@ -2201,7 +2201,7 @@ the conversion does not alter the string representation’s value</p>
         )</span>
     },
 
-    _getControlButtons: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  _getControlButtons: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-keyword">return</span> (
             <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-control-buttons"</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-button-save btn btn-success"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this._submit}</span>&gt;</span>Uložit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>

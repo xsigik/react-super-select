@@ -654,7 +654,7 @@ var ReactSuperSelect = React.createClass({
     }
 
     var searchContent = this._getSearchContent(),
-        selectionButtons = this._getSelectionButtons(),
+        selectionButtons = this.props.multiple ? this._getSelectionButtons() : null,
         controlButtons = this.props.multiple ? this._getControlButtons() : null,
         mouseMoveHandler,
         pagingLi;
@@ -837,7 +837,7 @@ var ReactSuperSelect = React.createClass({
         )
     },
 
-    _getControlButtons: function() {
+  _getControlButtons: function() {
         return (
             <div className="r-ss-control-buttons">
                 <button className="r-ss-button-save btn btn-success" onClick={this._submit}>Uložit</button>
