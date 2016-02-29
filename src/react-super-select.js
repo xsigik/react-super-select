@@ -410,7 +410,7 @@ var ReactSuperSelect = React.createClass({
     props = props || this.props;
     var initialValue = [];
 
-    if (!_.isUndefined(props.initialValue)) {
+    if (!_.isUndefined(props.initialValue) || props.initialValue != null) {
       initialValue = _.isArray(props.initialValue) ? props.initialValue : [props.initialValue];
 
       if (!this._isMultiSelect()) {
