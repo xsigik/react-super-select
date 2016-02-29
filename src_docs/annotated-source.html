@@ -1409,7 +1409,7 @@ sets focused option in callback after opening</p>
     props = props || <span class="hljs-keyword">this</span>.props;
     <span class="hljs-keyword">var</span> initialValue = [];
 
-    <span class="hljs-keyword">if</span> (!_.isUndefined(props.initialValue)) {
+    <span class="hljs-keyword">if</span> (!_.isUndefined(props.initialValue) || props.initialValue != <span class="hljs-literal">null</span>) {
       initialValue = _.isArray(props.initialValue) ? props.initialValue : [props.initialValue];
 
       <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>._isMultiSelect()) {
