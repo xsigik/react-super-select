@@ -1010,7 +1010,7 @@ and will be called as the predicate function of <a href="https://lodash.com/docs
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      labelKey: <span class="hljs-keyword">this</span>.props.optionLabelKey || <span class="hljs-string">'label'</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      labelKey: <span class="hljs-keyword">this</span>.props.optionLabelKey || <span class="hljs-string">'name'</span>,</pre></div></div>
             
         </li>
         
@@ -1070,7 +1070,7 @@ and will be called as the predicate function of <a href="https://lodash.com/docs
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      valueKey: <span class="hljs-keyword">this</span>.props.optionValueKey || <span class="hljs-string">'value'</span>,
+            <div class="content"><div class='highlight'><pre>      valueKey: <span class="hljs-keyword">this</span>.props.optionValueKey || <span class="hljs-string">'id'</span>,
 
       lang: <span class="hljs-keyword">this</span>.props.lang || <span class="hljs-string">'en'</span>
     };
@@ -1883,7 +1883,7 @@ will trigger the <strong>ajaxDataFetch</strong> fetch (and show loader) if neede
 
     <span class="hljs-keyword">var</span> searchContent = <span class="hljs-keyword">this</span>._getSearchContent(),
         selectionButtons = <span class="hljs-keyword">this</span>._getSelectionButtons(),
-        controlButtons = <span class="hljs-keyword">this</span>._getControlButtons(),
+        controlButtons = <span class="hljs-keyword">this</span>.props.multiple ? <span class="hljs-keyword">this</span>._getControlButtons() : <span class="hljs-literal">null</span>,
         mouseMoveHandler,
         pagingLi;
 
