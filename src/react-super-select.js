@@ -198,7 +198,7 @@ var ReactSuperSelect = React.createClass({
       placeholder: 'Vyberte...',
       searchPlaceholder: 'Vyhledat',
       tagRemoveLabelString: 'Odstranit štítek',
-      multiResultsLabel: 'Vybráno @COUNT@ kategorií'
+      multiResultsLabel: 'Vybráno @COUNT@'
     }
   },
 
