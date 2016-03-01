@@ -429,6 +429,7 @@ var ReactSuperSelect = React.createClass({
 
     _submit: function() {
         this.props.onSubmit(this.state.value);
+        this._closeOnKeypress();
     },
 
   // clear the searchString value
