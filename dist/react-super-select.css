@@ -301,6 +301,7 @@
   -ms-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+  outline: none;
 }
 .r-ss-dropdown .r-ss-dropdown-option:last-child {
   border-bottom: none;
