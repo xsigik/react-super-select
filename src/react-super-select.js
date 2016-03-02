@@ -1003,7 +1003,7 @@ var ReactSuperSelect = React.createClass({
             data-option-value={dataOption[this.state.valueKey]}
             onClick={this._selectItemOnOptionClick.bind(null, dataOption)}
             role="option">
-            <input type="checkbox" checked={isCurrentlySelected} readonly={true} />
+            <input type="checkbox" checked={isCurrentlySelected} readOnly={true} />
           {optionMarkup}
         </li>);
     }, this);
