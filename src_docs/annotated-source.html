@@ -1279,10 +1279,17 @@ Reset some state defaults and dataSource related fields if dataSource changed.</
     });
 
     placeholderString = <span class="hljs-keyword">this</span>.props.placeholder ? <span class="hljs-keyword">this</span>.props.placeholder : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].placeholder;
-	multiResultsLabelString = <span class="hljs-keyword">this</span>.props.multiResultsLabel ? <span class="hljs-keyword">this</span>.props.multiResultsLabel : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].multiResultsLabel;
-    multiResultsLabelString = multiResultsLabelString.replace(<span class="hljs-string">"@COUNT@"</span>, <span class="hljs-keyword">this</span>.state.value.length);
-	contentToDisplay = <span class="hljs-keyword">this</span>._isMultiSelect() ? multiResultsLabelString : <span class="hljs-keyword">this</span>._generateValueDisplay();
-    triggerDisplayContent = <span class="hljs-keyword">this</span>.state.value.length ? contentToDisplay : placeholderString;
+
+    contentToDisplay = placeholderString;
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._isMultiSelect()) {
+      multiResultsLabelString = <span class="hljs-keyword">this</span>.props.multiResultsLabel ? <span class="hljs-keyword">this</span>.props.multiResultsLabel : <span class="hljs-keyword">this</span>.DEFAULT_LOCALIZATIONS[<span class="hljs-keyword">this</span>.state.lang].multiResultsLabel;
+      multiResultsLabelString = multiResultsLabelString.replace(<span class="hljs-string">"@COUNT@"</span>, <span class="hljs-keyword">this</span>.state.value.length);
+      contentToDisplay = multiResultsLabelString;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.value.length) {
+      contentToDisplay = <span class="hljs-keyword">this</span>._generateValueDisplay();
+    }
+    triggerDisplayContent = contentToDisplay;
 
     <span class="hljs-keyword">if</span> (!_.isEmpty(<span class="hljs-keyword">this</span>.state.value) &amp;&amp; (<span class="hljs-keyword">this</span>.props.clearable !== <span class="hljs-literal">false</span>)) {
       clearSelectionButton = (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">{clearSelectionLabelString}</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"selectionClear"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"clearSelection"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-selection-clear"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this._clearSelection}</span> <span class="hljs-attr">onKeyDown</span>=<span class="hljs-string">{this._clearSelection}</span>&gt;</span>
@@ -1412,7 +1419,7 @@ sets focused option in callback after opening</p>
     <span class="hljs-keyword">if</span> (!_.isUndefined(props.initialValue) &amp;&amp; props.initialValue != <span class="hljs-literal">null</span>) {
       initialValue = _.isArray(props.initialValue) ? props.initialValue : [props.initialValue];
 
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>._isMultiSelect()) {
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>._isMultiSelect() &amp;&amp; _.isArray(initialValue) &amp;&amp; initialValue.length &gt; <span class="hljs-number">0</span>) {
         initialValue = [_.first(initialValue)];
       }
     }
