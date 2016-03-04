@@ -340,10 +340,17 @@ var ReactSuperSelect = React.createClass({
     });
 
     placeholderString = this.props.placeholder ? this.props.placeholder : this.DEFAULT_LOCALIZATIONS[this.state.lang].placeholder;
-	multiResultsLabelString = this.props.multiResultsLabel ? this.props.multiResultsLabel : this.DEFAULT_LOCALIZATIONS[this.state.lang].multiResultsLabel;
-    multiResultsLabelString = multiResultsLabelString.replace("@COUNT@", this.state.value.length);
-	contentToDisplay = this._isMultiSelect() ? multiResultsLabelString : this._generateValueDisplay();
-    triggerDisplayContent = this.state.value.length ? contentToDisplay : placeholderString;
+
+    contentToDisplay = placeholderString;
+
+    if (this._isMultiSelect()) {
+      multiResultsLabelString = this.props.multiResultsLabel ? this.props.multiResultsLabel : this.DEFAULT_LOCALIZATIONS[this.state.lang].multiResultsLabel;
+      multiResultsLabelString = multiResultsLabelString.replace("@COUNT@", this.state.value.length);
+      contentToDisplay = multiResultsLabelString;
+    } else if (this.state.value.length) {
+      contentToDisplay = this._generateValueDisplay();
+    }
+    triggerDisplayContent = contentToDisplay;
 
     if (!_.isEmpty(this.state.value) && (this.props.clearable !== false)) {
       clearSelectionButton = (<button aria-label={clearSelectionLabelString} ref="selectionClear" name="clearSelection" type="button" className="r-ss-selection-clear" onClick={this._clearSelection} onKeyDown={this._clearSelection}>
