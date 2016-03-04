@@ -6,7 +6,8 @@
 
 var _ = require('lodash'),
     classNames = require('classnames'),
-    React = require('react');
+    React = require('react'),
+    InfiniteScroll = require('react-infinite-scroll')(React);
 
 // Dependencies
 //  - [Lodash](https://lodash.com/)
@@ -668,14 +669,16 @@ var ReactSuperSelect = React.createClass({
         {searchContent}
         {selectionButtons}
         <div ref="scrollWrap" className="r-ss-options-wrap" onMouseMove={mouseMoveHandler}>
-          <ul className="r-ss-dropdown-options"
+          <div className="r-ss-dropdown-options"
               ref="dropdownOptionsList"
               tabIndex="-1"
               id={this._ariaGetListId()}
               role="listbox"
               aria-expanded={this.state.isOpen}>
-            {this._getOptionsMarkup()}
-          </ul>
+            <InfiniteScroll>
+              {this._getOptionsMarkup()}
+            </InfiniteScroll>
+          </div>
           {pagingLi}
         </div>
         {controlButtons}
@@ -993,7 +996,7 @@ var ReactSuperSelect = React.createClass({
           });
 
       return (
-        <li ref={indexRef}
+        <div ref={indexRef}
             id={ariaDescendantId}
             tabIndex="0"
             data-option-index={index}
@@ -1005,7 +1008,7 @@ var ReactSuperSelect = React.createClass({
             role="option">
             <input type="checkbox" checked={isCurrentlySelected} readOnly={true} />
           {optionMarkup}
-        </li>);
+        </div>);
     }, this);
   },
 

@@ -36,7 +36,8 @@
   "peerDependencies": {
     "classnames": "*",
     "lodash": "*",
-    "react": ">=0.14.0"
+    "react": ">=0.14.0",
+    "react-infinite-scroll": "^0.1.5"
   },
   "devDependencies": {
     "babel": "^6.0.15",

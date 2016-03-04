@@ -51,7 +51,8 @@
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>),
     classNames = <span class="hljs-built_in">require</span>(<span class="hljs-string">'classnames'</span>),
-    React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);</pre></div></div>
+    React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>),
+    InfiniteScroll = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-infinite-scroll'</span>)(React);</pre></div></div>
             
         </li>
         
@@ -1908,14 +1909,16 @@ will trigger the <strong>ajaxDataFetch</strong> fetch (and show loader) if neede
         {searchContent}
         {selectionButtons}
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"scrollWrap"</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-options-wrap"</span> <span class="hljs-attr">onMouseMove</span>=<span class="hljs-string">{mouseMoveHandler}</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-dropdown-options"</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"r-ss-dropdown-options"</span>
               <span class="hljs-attr">ref</span>=<span class="hljs-string">"dropdownOptionsList"</span>
               <span class="hljs-attr">tabIndex</span>=<span class="hljs-string">"-1"</span>
               <span class="hljs-attr">id</span>=<span class="hljs-string">{this._ariaGetListId()}</span>
               <span class="hljs-attr">role</span>=<span class="hljs-string">"listbox"</span>
               <span class="hljs-attr">aria-expanded</span>=<span class="hljs-string">{this.state.isOpen}</span>&gt;</span>
-            {this._getOptionsMarkup()}
-          <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">InfiniteScroll</span>&gt;</span>
+              {this._getOptionsMarkup()}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">InfiniteScroll</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           {pagingLi}
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         {controlButtons}
@@ -2517,7 +2520,7 @@ Leverage the <strong>customOptionTemplateFunction</strong> function if provided<
           });
 
       <span class="hljs-keyword">return</span> (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{indexRef}</span>
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{indexRef}</span>
             <span class="hljs-attr">id</span>=<span class="hljs-string">{ariaDescendantId}</span>
             <span class="hljs-attr">tabIndex</span>=<span class="hljs-string">"0"</span>
             <span class="hljs-attr">data-option-index</span>=<span class="hljs-string">{index}</span>
@@ -2529,7 +2532,7 @@ Leverage the <strong>customOptionTemplateFunction</strong> function if provided<
             <span class="hljs-attr">role</span>=<span class="hljs-string">"option"</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"checkbox"</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{isCurrentlySelected}</span> <span class="hljs-attr">readOnly</span>=<span class="hljs-string">{true}</span> /&gt;</span>
           {optionMarkup}
-        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>)</span>;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>)</span>;
     }, <span class="hljs-keyword">this</span>);
   },</pre></div></div>
             
