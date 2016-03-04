@@ -961,7 +961,7 @@ var ReactSuperSelect = React.createClass({
     this.setState({
       searchString: search
     });
-  }, 300),
+  }, 30),
 
   // return the boolean used to determine whether an option should have the 'r-ss-selected' class
   _isCurrentlySelected: function(dataItem) {
